@@ -43,9 +43,9 @@ def login():
 
 @app.route('/')
 @app.route('/index')
-#@login_required
+@login_required
 def index():
-    return render_template('index.html')
+    return render_template('index.html',username=current_user.username)
 
 @app.route('/wjgl')
 def wjgl():

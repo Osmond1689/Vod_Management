@@ -6,9 +6,9 @@ import uuid,logging
 
 # define profile.json constant, the file is used to
 # save user name and password_hash
-
+PROFILE_FILE = "model/profiles.json"
 class User(UserMixin):
-    PROFILE_FILE = "model/profiles.json"
+    
     def __init__(self, username):
         self.username = username
         self.password_hash = self.get_password_hash()
@@ -44,7 +44,7 @@ class User(UserMixin):
                 None: if there is no corresponding user, return None.
         """
         try:
-            with open(self.PROFILE_FILE) as f:
+            with open(PROFILE_FILE) as f:
                 user_profiles = json.load(f)
                 #logging.info(user_profiles)
                 user_info = user_profiles.get(self.username, None)
@@ -62,7 +62,7 @@ class User(UserMixin):
         """
         if self.username is not None:
             try:
-                with open(self.PROFILE_FILE) as f:
+                with open(PROFILE_FILE) as f:
                     user_profiles = json.load(f)
                     if self.username in user_profiles:
                         return user_profiles[self.username][1]
@@ -80,7 +80,7 @@ class User(UserMixin):
         if not user_id:
             return None
         try:
-            with open(self.PROFILE_FILE) as f:
+            with open(PROFILE_FILE) as f:
                 user_profiles = json.load(f)
                 for user_name, profile in user_profiles.items():
                     if profile[1] == user_id:
