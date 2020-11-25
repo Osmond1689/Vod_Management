@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Video Monitor</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../static/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="../static/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../static/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="../static/css/googleapis.css" rel="stylesheet">
+    <script src=" ../static/plugins/jquery/jquery.min.js "></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <style>
+         ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        html,
+        body {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <!-- <div class="row">
+                            <div class="col-sm-12 col-md-6"></div>
+                            <div class="col-sm-12 col-md-6"></div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>文件名称</th>
+                                            <th>文件大小</th>
+                                            <th>上传时间</th>
+                                            <th>播放地址</th>
+                                                </tr>
+                                        </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+    <div class="row" id="bar" style="width:100%; height:100%;"></div>
+    <script>
+        $(document).ready(function() {
+     $('#example2').DataTable( {
+        "searching" : false, //去掉搜索框方法一
+        "bFilter": false,   //去掉搜索框方法二
+        "info": false ,  //去掉底部文字
+         "ajax": "/ycbj",
+         "columns": [
+             { "data": "tingfang" },
+             { "data": "ztname" },
+             { "data": "ztaddr" },
+             { "data": "ztstatus" },
+             { "data": "testtime" }
+         ]
+     } );
+ } );
+    </script>
+    <!-- Bootstrap -->
+    <script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- AdminLTE -->
+    <script src="../static/js/adminlte.js "></script>
+    <script>
+        /*Fixing iframe window.innerHeight 0 issue in Safari*/
+        document.body.clientHeight;
+    </script>
+    <!-- OPTIONAL SCRIPTS -->
+</body>
+
+</html>

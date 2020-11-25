@@ -8,7 +8,7 @@ import uuid,logging
 # save user name and password_hash
 
 class User(UserMixin):
-    PROFILE_FILE = "ftp-manage/model/profiles.json"
+    PROFILE_FILE = "model/profiles.json"
     def __init__(self, username):
         self.username = username
         self.password_hash = self.get_password_hash()

@@ -42,10 +42,14 @@ def login():
     return render_template('login.html',form=form)   
 
 @app.route('/')
-@app.route('/index',methods=['get','post'])
-@login_required
+@app.route('/index')
+#@login_required
 def index():
-    return render_template('index.html',username=current_user.username)
+    return render_template('index.html')
+
+@app.route('/wjgl')
+def wjgl():
+    return render_template('wjgl.html')
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0',port=80,debug=True)
+    app.run(host='0.0.0.0',port=8080,debug=True)
