@@ -46,10 +46,23 @@ def login():
 @login_required
 def index():
     return render_template('index.html',username=current_user.username)
-
+#文件管理ifram页面
 @app.route('/wjgl')
 def wjgl():
     return render_template('wjgl.html')
+#文件查找，显示目录
+@app.route('/wjcz')
+def wjcz():
+    pass
+#文件上传
+@app.route('/wjsc')
+def wjsc():
+    pass
+#密码修改
+@app.route('/mmxg')
+def mmxg():
+    pass
+
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=8080,debug=True)
