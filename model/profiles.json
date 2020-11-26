@@ -1,1 +1,13 @@
-{"admin": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 123]}
+{
+    "admin": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 11],
+    "A01": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 12],
+    "A02": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 13],
+    "A03": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 14],
+    "A04": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 15],
+    "A05": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 16],
+    "A06": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 17],
+    "B01": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 18],
+    "C01": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 19],
+    "C02": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 20],
+    "ICB": ["pbkdf2:sha256:150000$eU1R1sYk$16e8e915c9338d9d30904320ed6c0b96d86846fbda6bf30e5aa7defcdd0de93a", 21]
+}

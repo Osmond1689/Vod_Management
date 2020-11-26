@@ -1,13 +1,10 @@
-from flask import Flask,flash,abort,request,redirect,url_for
-from flask import render_template
+from flask import Flask,flash,abort,request,redirect,url_for,render_template,Response
 from flask_wtf.csrf import CSRFProtect
 #import sys
 #sys.path.append('/root/python/ftp-manage')
-from flask_login import login_user, login_required
-from flask_login import LoginManager, current_user
-from flask_login import logout_user
+from flask_login import login_user, login_required,LoginManager, current_user,logout_user
 from form.login_form import LoginForm
-import os
+import os,json,time
 from model.checkpasswd import User
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -47,18 +44,35 @@ def login():
 def index():
     return render_template('index.html',username=current_user.username)
 #文件管理ifram页面
+@login_required
 @app.route('/wjgl')
 def wjgl():
     return render_template('wjgl.html')
 #文件查找，显示目录
+@login_required
 @app.route('/wjcz')
 def wjcz():
-    pass
+    homepath='/home/god/Python/Vod_Management/vod/'
+    userpath=homepath+current_user.username
+    filename=os.listdir(userpath)
+    playpath='https://vod.yzbabyu.com/'+current_user.username
+    wjlb={}
+    wjxq=[]
+    for x in filename:
+        wjxq.append({ "wjname":x,"wjsize":os.path.getsize(userpath+'/'+x),"wjtime":time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(os.path.getctime(userpath+'/'+x))),"wjplay":playpath+'/'+x})
+    wjlb['data']=wjxq
+    return Response(json.dumps(wjlb), mimetype='application/json')    
+    #os.path.getmtime(path)
+    #os.path.getctime(path)	
+    #app.logger.info(filename)
+    #return 'ok'
 #文件上传
+@login_required
 @app.route('/wjsc')
 def wjsc():
     pass
 #密码修改
+@login_required
 @app.route('/mmxg')
 def mmxg():
     pass
