@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"/>
     <!-- Google Font: Source Sans Pro -->
     <link href="../static/css/googleapis.css" rel="stylesheet">
     <script src=" ../static/plugins/jquery/jquery.min.js "></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
     <style>
          ::-webkit-scrollbar {
             display: none;
@@ -58,30 +60,65 @@
                 <!-- /.card-body -->
               </div>
     <!-- /.card -->
+    <!-- modal -->
     <div class="row" id="bar" style="width:100%; height:100%;"></div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">视频文件上传</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/wjgl" method="POST" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        <div class="box-body">
+                             {{ form.video_file(multiple="multiple",accept=".mp4,.flv,.jpeg")}}
+                            <p class="help-block"><font style="vertical-align: middle;"><font style="vertical-align: middle;">仅支持MP4和FLV文件上传</font></font></p>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                {{ form.submit(class="btn btn-primary")}}
+                                <!-- <button type="submit" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button> -->
+                            </div>
+                          </div>
+                        <!-- /.box-body -->
+                      </form>
+                </div>
+                
+            </div><!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
     <script>
         $(document).ready(function() {
      $('#example2').DataTable( {
-        //"searching" : false, //去掉搜索框方法一
-        //"bFilter": false,   //去掉搜索框方法二
-        //"info": false ,  //去掉底部文字
         "paging": true,
         "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,
-        //'orderable': false,
-        "lengthMenu":[20,50,100],
+        "lengthMenu":[15,50,100],
         "ajax": "/wjcz",
+        "dom": 'Bfrtip',
+        "buttons": [
+            {
+                extend: 'reload',
+                text: '<i class="fa fa-undo" aria-hidden="true"></i>'
+            },
+            {
+                extend: 'upload',
+                text: '<i class="fa fa-file-video" aria-hidden="true"></i>'
+            },
+        ],
         "columnDefs" : [ {
             // 定义操作列,######以下是重点########
             "targets" : 4,//操作按钮目标列
             "data" : null,
             "render" : function(data, type,row) {
             var id = '"' + row.id + '"';
-            var html = "<a href='javascript:void(0);'  class='delete btn btn-default btn-xs'  ><i class='fa fa-times'></i> 播放</a>"
-            html += "<a href='javascript:void(0);' class='up btn btn-default btn-xs'><i class='fa fa-arrow-up'></i> 编辑</a>"
-            html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser("+ id + ")'  class='down btn btn-default btn-xs'><i class='fa fa-arrow-down'></i> 删除</a>"
+            var html = "<a href='javascript:void(0);'  class='delete btn btn-default btn-xs'  ><i class='fa fa-play'></i> 播放</a>"
+            html += "<a href='javascript:void(0);' class='up btn btn-default btn-xs'><i class='fa fa-cog'></i> 编辑</a>"
+            html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser("+ id + ")'  class='down btn btn-default btn-xs'><i class='fa fa-times'></i> 删除</a>"
             return html;
 }
 } ],
@@ -94,6 +131,18 @@
          
      } );
  } );
+    </script>
+    <script>
+    $.fn.dataTable.ext.buttons.reload = {
+        action: function ( e, dt, node, config ) {
+            dt.ajax.reload();
+        }
+    };
+    $.fn.dataTable.ext.buttons.upload = {
+        action: function () {
+            $("#myModal").modal();
+        }
+    };
     </script>
     <!-- Bootstrap -->
     <script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
