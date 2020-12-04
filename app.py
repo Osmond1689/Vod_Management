@@ -67,7 +67,10 @@ def wjgl():
         # save(文件路径)
             video_file.save(f'{homepath}/{current_user.username}/{file_name}')
 
-        return "文件上传成功"
+        flash('上传成功','success')
+    else:
+        flash('上传失败','danger')
+    return redirect(url_for('wjgl'))
 #文件查找，显示目录
 @login_required
 @app.route('/wjcz')
