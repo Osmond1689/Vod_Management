@@ -126,13 +126,13 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="embed-responsive embed-responsive-16by9 modal-content">
-            <iframe scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" src="https://icbvod.yzbabyu.com:8443/icb/qyys.mp4"></iframe>
+            <iframe scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
         </div>
     </div>
     </div>
     <script>
         $(document).ready(function() {
-     $('#example2').DataTable( {
+        var $table=$('#example2').DataTable( {
         "paging": true,
         "searching": true,
         "ordering": true,
@@ -155,11 +155,12 @@
             // 定义操作列,######以下是重点########
             "targets" : 4,//操作按钮目标列
             "data" : null,
-            "render" : function(data, type,row) {
-            console.log(id)
-            var html = "<a><i class='fa fa-play' data-toggle='modal' data-target='#play'  @click='addVideoToModal(index,slideIndex)'>播放</i></a>"
-            html += "<a href='javascript:void(0);' onclick='edit()' class='btn btn-default btn-xs'><i class='fa fa-cog'></i> 编辑</a>"
-            html += "<a href='javascript:void(0);'   onclick='del()' class='btn btn-default btn-xs'><i class='fa fa-times'></i> 删除</a>"
+            //"defaultContent":"<a id='playv' href= '#' onclick='playv(data)'' ><i class='fa fa-play' data-toggle='modal' data-target='#play'  >播放</i></a>",
+            "render" : function(data,type,row) {
+            //console.log(data)
+            var html = "<a id='playv' ><i class='fa fa-play' data-toggle='modal' data-target='#play' >播放</i></a>"
+            html += "<a id='editv'  class='btn btn-default btn-xs'><i class='fa fa-cog'></i> 编辑</a>"
+            html += "<a id='delv'  class='btn btn-default btn-xs'><i class='fa fa-times'></i> 删除</a>"
             return html;
 }
 } ],
@@ -169,13 +170,15 @@
              { "data": "wjtime" },
              { "data": "wjplay" }
          ]
-         
      } );
- } );
+    
+        } );
+    
     </script>
     <script>
         $.fn.dataTable.ext.buttons.reload = {
-            action: function ( e, dt, node, config ) {
+            action: function ( e, dt ) {
+                console.log(e,dt)
                 dt.ajax.reload();
             }
         };
@@ -186,13 +189,20 @@
         };
     </script>
     <script>
-    // addVideoToModal:function(dayIndex,slideIndex){
-    // var videoUrl=this.groupInfo.route[dayIndex].slide[slideIndex].video;
-    // $("#play iframe").attr("src",videoUrl);
-    // };
+    function playv() {
+        //console.log(data)
+        console.log(1)
+    };
+    </script>
+    <script>
     $("#play").on("hidden.bs.modal",function(){
     $(this).find("iframe").removeAttr("src");
     });
+    // $("#play").on("show.bs.modal",function(){
+    //     var name = $("#play").data("wjplay"); 
+    //     console.log(name)
+    //     //$(this).find("#play iframe").Attr("src",data);
+    // });
     function edit() {
         var request=new XMLHttpRequest();//建立request请求
         
