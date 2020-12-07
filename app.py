@@ -15,7 +15,7 @@ login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 login_manager.init_app(app=app)
 app.config["SECRET_KEY"] = os.urandom(24)
-homepath='/home/god/Python/Vod_Management/vod/'
+homepath=r"D:/app/Vod_Management/vod/"
 @login_manager.user_loader
 def load_user(userid):
     return User.get(userid)

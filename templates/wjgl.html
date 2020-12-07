@@ -118,7 +118,7 @@
             </div>
         </div>
     </div> -->
-
+<!-- play modal -->
     <div class="modal fade"
     id="play"
     tabindex="-1"
@@ -130,6 +130,32 @@
         </div>
     </div>
     </div>
+    <!-- rename modal -->
+    <!-- <div class="modal fade"
+    id="rename"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-info btn-flat">修改</button>
+                </span>
+          </div>
+    </div>
+    </div>
+    <div class="modal fade"
+    id="del"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="embed-responsive embed-responsive-16by9 modal-content">
+            <iframe scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+    </div> -->
     <script>
         $(document).ready(function() {
         var $table=$('#example2').DataTable( {
@@ -156,11 +182,9 @@
             "targets" : 4,//操作按钮目标列
             "data" : null,
             //"defaultContent":"<a id='playv' href= '#' onclick='playv(data)'' ><i class='fa fa-play' data-toggle='modal' data-target='#play'  >播放</i></a>",
-            "render" : function(data,type,row) {
+            "render" : function() {
             //console.log(data)
-            var html = "<a id='playv' ><i class='fa fa-play' data-toggle='modal' data-target='#play' >播放</i></a>"
-            html += "<a id='editv'  class='btn btn-default btn-xs'><i class='fa fa-cog'></i> 编辑</a>"
-            html += "<a id='delv'  class='btn btn-default btn-xs'><i class='fa fa-times'></i> 删除</a>"
+            var html = "<a  class='btn btn-default btn-xs' ><i class='fa fa-play' data-toggle='modal' data-target='#play' >播放</i></a>"
             return html;
 }
 } ],
@@ -189,60 +213,16 @@
         };
     </script>
     <script>
-    function playv() {
-        //console.log(data)
-        console.log(1)
-    };
-    </script>
-    <script>
     $("#play").on("hidden.bs.modal",function(){
     $(this).find("iframe").removeAttr("src");
     });
-    // $("#play").on("show.bs.modal",function(){
-    //     var name = $("#play").data("wjplay"); 
-    //     console.log(name)
-    //     //$(this).find("#play iframe").Attr("src",data);
-    // });
-    function edit() {
-        var request=new XMLHttpRequest();//建立request请求
-        
-        request.open('post','/edit');//发送对象是boke.php 发送post
-        
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//请求头 默认即可
-        
-        var name=form1.name.value;//获取文本框内输入的内容
-        
-        request.send("name="+name);//发送request请求 请求可以有多个post 格式：key1=value1&key2=value2 php端根据key取出value
-        //确认接收消息
-        request.onreadystatechange=function () {
-            // readyState=4为php收到并返回值 status为返回字段为200火304
-            if(request.readyState==4&&(request.status==200||request.status==304)){
-                //弹出窗口显示php返回的值
-                alert(request.responseText);
-            }
-        }
-
-    };
-    function del() {
-        var request=new XMLHttpRequest();//建立request请求
-        
-        request.open('post','/del');//发送对象是boke.php 发送post
-        
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//请求头 默认即可
-        
-        var name=form1.name.value;//获取文本框内输入的内容
-        
-        request.send("name="+name);//发送request请求 请求可以有多个post 格式：key1=value1&key2=value2 php端根据key取出value
-        //确认接收消息
-        request.onreadystatechange=function () {
-            // readyState=4为php收到并返回值 status为返回字段为200火304
-            if(request.readyState==4&&(request.status==200||request.status==304)){
-                //弹出窗口显示php返回的值
-                alert(request.responseText);
-            }
-        }
-
-    }
+    $("#play").on("show.bs.modal",function(event){
+    var btnThis = $(event.relatedTarget); //触发事件的按钮
+    var modal = $(this); 
+    currentDataId = btnThis.closest('tr').find('td').eq(3).text();
+    console.log(currentDataId)
+    $(this).find("iframe").attr("src",currentDataId);
+    });
     </script>
     <!-- Bootstrap -->
     <script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
