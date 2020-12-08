@@ -75,12 +75,13 @@ def wjgl():
 @login_required
 @app.route('/wjcz')
 def wjcz():
-    userpath=homepath+current_user.username
+    product={"A02":"test2"}
+    userpath=r"D:/app/Vod_Management/vod-play/"+product.get(current_user.username)
     filename=os.listdir(userpath)
     if current_user.username=='ICB':
-        playpath='https://icbvod.yzbabyu.com/'+current_user.username
+        playpath='https://icbvod.yzbabyu.com/'+product.get(current_user.username)
     else:
-        playpath='https://vod.yzbabyu.com/'+current_user.username
+        playpath='https://vod.yzbabyu.com/'+product.get(current_user.username)
     wjlb={}
     wjxq=[]
     for x in filename:
@@ -92,6 +93,13 @@ def wjcz():
 @app.route('/wjsc')
 def wjsc():
     pass
+#注销登录
+@login_required
+@app.route('/loginout')
+def loginout():
+    logout_user()
+    return redirect(url_for('login'))
+    
 #密码修改
 # @login_required
 # @app.route('/mmxg')
