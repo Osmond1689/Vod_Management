@@ -96,7 +96,7 @@ def wjsc():
 @login_required
 @app.route('/mmxg')
 def mmxg():
-    return User.passwordxg('123456')
+    return User.passwordxg('!QAZ2wsx')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=8080,debug=True)
