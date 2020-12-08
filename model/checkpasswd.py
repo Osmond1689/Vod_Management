@@ -18,18 +18,8 @@ class User(UserMixin):
     def password(self):
         raise AttributeError('password is not a readable attribute')
 
-    # @password.setter
-    # def password(self, password):
-    #     """save user name, id and password hash to json file"""
-    #     self.password_hash = generate_password_hash(password)
-    #     with open(PROFILE_FILE, 'w+') as f:
-    #         try:
-    #             profiles = json.load(f)
-    #         except ValueError:
-    #             profiles = {}
-    #         profiles[self.username] = [self.password_hash,
-    #                                    self.id]
-    #         f.write(json.dumps(profiles))
+    def passwordxg(password):
+        return generate_password_hash(password)
 
     def verify_password(self, password):
         if self.password_hash is None:

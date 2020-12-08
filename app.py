@@ -28,7 +28,7 @@ def login():
     if form.validate_on_submit():
         user_name = request.form.get('accountNumber', None)
         password = request.form.get('password', None)
-        #app.logger.info(user_name)
+        #app.logger.info(user_name )
         user = User(user_name)
         #print(user)
         if user.verify_password(password):
@@ -77,7 +77,10 @@ def wjgl():
 def wjcz():
     userpath=homepath+current_user.username
     filename=os.listdir(userpath)
-    playpath='https://vod.yzbabyu.com/'+current_user.username
+    if current_user.username=='ICB':
+        playpath='https://icbvod.yzbabyu.com/'+current_user.username
+    else:
+        playpath='https://vod.yzbabyu.com/'+current_user.username
     wjlb={}
     wjxq=[]
     for x in filename:
@@ -93,6 +96,7 @@ def wjsc():
 @login_required
 @app.route('/mmxg')
 def mmxg():
-    pass
+    return User.passwordxg('123456')
+
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=8080,debug=True)
